@@ -24,8 +24,8 @@ void runAnalysis(Int_t opt)
   /**
    * RUN ON LOCAL:
    */
-  // Bool_t local    = kTRUE;
-  // Bool_t gridTest = kFALSE;
+  Bool_t local    = kTRUE;
+  Bool_t gridTest = kFALSE;
 
   /**
    * RUN ON GRIDTEST:
@@ -37,8 +37,8 @@ void runAnalysis(Int_t opt)
   /**
    * FULL GRID MOD:
    */
-  Bool_t local    = kFALSE;
-  Bool_t gridTest = kFALSE;
+  // Bool_t local    = kFALSE;
+  // Bool_t gridTest = kFALSE;
 
 
 #if !defined (__CINT__) || defined (__CLING__)
@@ -78,9 +78,9 @@ void runAnalysis(Int_t opt)
         // add a few files to the chain (change this so that your local files are added)
 
         // FILE *f = fopen("list2015Full.txt","r");
-        FILE *f = fopen("list.txt","r");
+        // FILE *f = fopen("list.txt","r");
         // FILE *f = fopen("listLHC18qrAndLHC15o.txt","r");
-        // FILE *f = fopen("listPROVA.txt","r");
+        FILE *f = fopen("listPROVA.txt","r");
         char fileadd[300];
         Int_t flaggingValue = 0;
         while(fscanf(f,"%s",fileadd)==1){
@@ -200,20 +200,20 @@ void runAnalysis(Int_t opt)
         // merging: run with "kTRUE" and "full" for normal run
         // to merge on grid run jobs in SetRunMode("terminate")
         // to collect final results set SetMergeViaJDL(kFALSE)
-        // alienHandler->SetMergeViaJDL(kTRUE);
+        alienHandler->SetMergeViaJDL(kTRUE);
 
         /* - The setting to kFALSE is to download the output files
            -
          */
-        alienHandler->SetMergeViaJDL(kFALSE);
+        // alienHandler->SetMergeViaJDL(kFALSE);
         alienHandler->SetMaxMergeStages(1);
 
 
-        TString LHC16s("LHC16s");
+        TString LHC18q("LHC18q");
         // define the output folders
-        alienHandler->SetGridWorkingDir("PbPbLHC16q_Daniel");
+        alienHandler->SetGridWorkingDir("PbPbLHC18q_QT");
         // alienHandler->SetGridOutputDir("myOutputDir");
-        if (opt == 0) alienHandler->SetGridOutputDir(LHC16s.Data());
+        if (opt == 0) alienHandler->SetGridOutputDir(LHC18q.Data());
 
 
 
@@ -231,12 +231,12 @@ void runAnalysis(Int_t opt)
             /* - The option FULL is to send the full analysis.
                -
              */
-            // alienHandler->SetRunMode("full");
+            alienHandler->SetRunMode("full");
 
             /* - This option TERMINATE is used for the merging of the files.
                -
              */
-            alienHandler->SetRunMode("terminate");
+            // alienHandler->SetRunMode("terminate");
             mgr->StartAnalysis("grid");
         }
     }

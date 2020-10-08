@@ -256,8 +256,8 @@ void AliAnalysisTaskPbPbTree::UserCreateOutputObjects()
 
   //muon track cuts
   fMuonTrackCuts = new AliMuonTrackCuts("StdMuonCuts", "StdMuonCuts");
-  fMuonTrackCuts->SetFilterMask(    // AliMuonTrackCuts::kMuEta     |
-                                    // AliMuonTrackCuts::kMuThetaAbs|
+  fMuonTrackCuts->SetFilterMask(    AliMuonTrackCuts::kMuEta     |
+                                    AliMuonTrackCuts::kMuThetaAbs|
                                     AliMuonTrackCuts::kMuPdca    |
                                     AliMuonTrackCuts::kMuMatchLpt   );
   fMuonTrackCuts->SetAllowDefaultParams(kTRUE);
@@ -265,9 +265,9 @@ void AliAnalysisTaskPbPbTree::UserCreateOutputObjects()
 
   fTree = new TTree("Data","Data");
 	//define branches
-	// fTree->Branch( "fInvariantMassDimuon", &fInvariantMassDimuon, "fInvariantMassDimuon/D");
-  // fTree->Branch( "fRapidityDimuon",      &fRapidityDimuon,      "fRapidityDimuon/D");
-  // fTree->Branch( "fPtDimuon",            &fPtDimuon,            "fPtDimuon/D");
+	fTree->Branch( "fInvariantMassDimuon",    &fInvariantMassDimuon, "fInvariantMassDimuon/D");
+  fTree->Branch( "fRapidityDimuon",         &fRapidityDimuon,      "fRapidityDimuon/D");
+  fTree->Branch( "fPtDimuon",               &fPtDimuon,            "fPtDimuon/D");
   // fTree->Branch( "fTracklets",           &fTracklets,           "fTracklets/D");
   // fTree->Branch( "fV0TotalNCells",       &fV0TotalNCells,       "fV0TotalNCells/I");
   // fTree->Branch( "fZNCEnergy",           &fZNCEnergy,           "fZNCEnergy/D");
