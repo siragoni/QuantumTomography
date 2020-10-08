@@ -1,3 +1,4 @@
 *.xml
 *.sh
 *_cxx*
+*.root
