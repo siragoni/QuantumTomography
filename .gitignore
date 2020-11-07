@@ -2,3 +2,5 @@
 *.sh
 *_cxx*
 *.root
+MC/
+*.txt

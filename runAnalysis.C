@@ -184,6 +184,17 @@ void runAnalysis(Int_t opt)
         //   alienHandler->AddRunNumber( listOfGoodRunNumbersLHC18r[iRunLHC18r] );
         // }
 
+      } else if (opt == 2) {
+      	  alienHandler->SetGridDataDir("/alice/data/2015/LHC15o");
+      	  alienHandler->SetDataPattern("*muon_calo_pass1/AOD229/PWGUD/UD_PbPb_AOD/522_20190828-1630/*AliAOD.UPCNano.root");
+      	  // MC has no prefix, data has prefix 000
+      	  alienHandler->SetRunPrefix("000");
+      	  // runnumber
+      	  alienHandler->AddRunNumber(246087);
+          // for( Int_t iRunLHC18r = 0; iRunLHC18r <  97; iRunLHC18r++){
+          //   alienHandler->AddRunNumber( listOfGoodRunNumbersLHC18r[iRunLHC18r] );
+          // }
+
       } else {
         cout << " not a valid option ... bye!" << endl;
       }
@@ -200,18 +211,18 @@ void runAnalysis(Int_t opt)
         // merging: run with "kTRUE" and "full" for normal run
         // to merge on grid run jobs in SetRunMode("terminate")
         // to collect final results set SetMergeViaJDL(kFALSE)
-        // alienHandler->SetMergeViaJDL(kTRUE);
+        alienHandler->SetMergeViaJDL(kTRUE);
 
         /* - The setting to kFALSE is to download the output files
            -
          */
-        alienHandler->SetMergeViaJDL(kFALSE);
+        // alienHandler->SetMergeViaJDL(kFALSE);
         alienHandler->SetMaxMergeStages(1);
 
 
         TString LHC18q("LHC18q");
         // define the output folders
-        alienHandler->SetGridWorkingDir("PbPbLHC18r_QT_complete");
+        alienHandler->SetGridWorkingDir("PbPbLHC15o_QT_complete");
         // alienHandler->SetGridOutputDir("myOutputDir");
         if (opt == 0) alienHandler->SetGridOutputDir(LHC18q.Data());
 
@@ -231,12 +242,12 @@ void runAnalysis(Int_t opt)
             /* - The option FULL is to send the full analysis.
                -
              */
-            // alienHandler->SetRunMode("full");
+            alienHandler->SetRunMode("full");
 
             /* - This option TERMINATE is used for the merging of the files.
                -
              */
-            alienHandler->SetRunMode("terminate");
+            // alienHandler->SetRunMode("terminate");
             mgr->StartAnalysis("grid");
         }
     }
